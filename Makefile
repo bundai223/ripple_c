@@ -5,16 +5,19 @@
 
 .PHONY: ripple_stackoverflow
 
-ripple_stackoverflow: ripple ripple_copilot
+ripple_stackoverflow: build build/ripple build/ripple_copilot
 
-ripple: src/ripple.c
+build:
+	mkdir -p build
+
+build/ripple: src/ripple.c
 	clang -o $@ -lm $^
 
-ripple_copilot: src/ripple_copilot.c
+build/ripple_copilot: src/ripple_copilot.c
 	clang -o $@ -lm $^
 
 
 .PHONY: clean
 
 clean:
-	rm -f ripple ripple_copilot
+	rm -f build/ripple build/ripple_copilot
